@@ -12,8 +12,10 @@ namespace WebApiStructureNetCore.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(128)", nullable: false),
                     Email = table.Column<string>(type: "varchar(254)", nullable: false),
+                    Senha = table.Column<string>(type: "varchar(128)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(35)", nullable: false),
-                    Sobrenome = table.Column<string>(type: "nvarchar(35)", nullable: false)
+                    Sobrenome = table.Column<string>(type: "nvarchar(35)", nullable: false),
+                    CriadoEm = table.Column<string>(type: "smalldatetime", nullable: false),
                 },
                 constraints: table =>
                 {

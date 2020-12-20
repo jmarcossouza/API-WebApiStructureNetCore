@@ -13,6 +13,7 @@ namespace WebApiStructureNetCore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //Connection string here
             optionsBuilder.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=WebapiStructureDatabase;Data Source=DESKTOP-5DKEVPB");
         }
     }
