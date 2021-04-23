@@ -10,6 +10,7 @@ namespace WebApiStructureNetCore.Data
     public class WebapiStructureDbContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<LogErrors> LogErrors { get; set; }
 
         public WebapiStructureDbContext(DbContextOptions<WebapiStructureDbContext> options) : base(options)
         {
@@ -29,8 +30,20 @@ namespace WebApiStructureNetCore.Data
                 .HasIndex(e => e.Email)
                 .IsUnique();
             UsuarioEntity
-                .Property(x => x.CriadoEm)
-                .HasColumnType("smalldatetime");
+                .Property(x => x.Senha)
+                .HasColumnType("varchar");
+
+            var LogErrorsEntity = modelBuilder.Entity<LogErrors>();
+            LogErrorsEntity
+                .HasOne(c => c.Usuario)
+                .WithMany(e => e.LogErrors)
+                .OnDelete(DeleteBehavior.SetNull);
+            LogErrorsEntity
+                .Property(c => c.Resolvido)
+                .HasDefaultValue(false);
+            LogErrorsEntity
+                .Property(x => x.Erro)
+                .HasColumnType("varchar");
         }
     }
 }

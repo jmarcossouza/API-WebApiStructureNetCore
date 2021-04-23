@@ -15,7 +15,7 @@ namespace WebApiStructureNetCore.Exceptions
         /// <summary>
         /// Identificador do tipo erro, isso é usado para o client identificar qual o tipo de erro que ele recebeu.
         /// </summary>
-        protected int Type { get; set; }
+        protected short Type { get; set; }
 
         public CustomException(int statusCode, string message)
             : base(message)

@@ -19,8 +19,9 @@ namespace WebApiStructureNetCore.Models
         public long Id { get; set; }
         [Required]
         [MaxLength(254)]
+        [Column(TypeName = "varchar")]
         public string Email { get; set; }
-        [Column("Senha")]
+        [Column("Senha", TypeName = "varchar")]
         private string _senha;
         [Required]
         [MinLength(8)]
@@ -35,12 +36,17 @@ namespace WebApiStructureNetCore.Models
         [Required]
         [MinLength(2)]
         [MaxLength(35)]
+        [Column(TypeName = "varchar")]
         public string Nome { get; set; }
         [Required]
         [MinLength(2)]
         [MaxLength(35)]
+        [Column(TypeName = "varchar")]
         public string Sobrenome { get; set; }
+        [Column(TypeName = "datetime2(0)")]
         public DateTime CriadoEm { get; private set; }
+
+        public ICollection<LogErrors> LogErrors { get; set; }
 
         public Usuario()
         {
