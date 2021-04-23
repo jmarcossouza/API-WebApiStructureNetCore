@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiStructureNetCore.Data;
+using WebApiStructureNetCore.Exceptions;
 using WebApiStructureNetCore.Models;
 
 namespace WebApiStructureNetCore.Controllers
