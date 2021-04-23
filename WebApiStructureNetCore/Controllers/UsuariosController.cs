@@ -81,7 +81,7 @@ namespace WebApiStructureNetCore.Controllers
         {
             if (usuario.Id != 0) // Importante colocar isso aqui pro client não enviar o id e acabar cadastrando no banco como ele quer.
             {
-                return BadRequest(); // Tratar isso melhor, mandar uma mensagem informando o usuário.
+                throw new ValidationException("O campo 'id' deve possuir valor 0.");
             }
 
             _context.Usuarios.Add(usuario);

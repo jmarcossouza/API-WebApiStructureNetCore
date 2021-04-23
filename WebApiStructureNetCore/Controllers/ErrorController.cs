@@ -7,11 +7,12 @@ namespace WebApiStructureNetCore.Controllers
     [ApiController]
     public class ErrorController : ControllerBase
     {
+        [ApiExplorerSettings(IgnoreApi = true)] // Para o swagger ignorar esse method
         [Route("/error")]
         public IActionResult Error()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            if (context.Error.GetType().Equals(typeof(CustomException)))
+            if (context.Error.GetType().IsSubclassOf(typeof(CustomException)))
             {
                 CustomException error = (CustomException)context.Error;
                 return StatusCode(error.StatusCode, error.GetResponse());
