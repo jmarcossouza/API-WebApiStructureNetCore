@@ -45,5 +45,22 @@ namespace WebApiStructureNetCore.Data
                 .Property(x => x.Erro)
                 .HasColumnType("varchar");
         }
+
+        /// <summary>
+        /// Método para "Detach" todas as entidades que estejam sendo rastreadas pelo contexto.
+        /// Tive de implementar esse método pois se tentar usar o 'SaveChanges()' depois de ter dado algum erro em algum outro 'SaveChanges()' anterior, irá dar throw no primeiro erro ocorrido no 'SaveChanges()'.
+        /// Portanto usar o 'DetachAllEntities()' após algum erro no 'SaveChanges()' se quiser executá-lo novamente.
+        /// </summary>
+        public void DetachAllEntities()
+        {
+            var changedEntriesCopy = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added ||
+                            e.State == EntityState.Modified ||
+                            e.State == EntityState.Deleted)
+                .ToList();
+
+            foreach (var entry in changedEntriesCopy)
+                entry.State = EntityState.Detached;
+        }
     }
 }

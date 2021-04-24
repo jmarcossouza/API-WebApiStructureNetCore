@@ -25,5 +25,16 @@ namespace WebApiStructureNetCore.Exceptions
                 Id = Id,
             };
         }
+
+        public LogErrors CreateLogErrorsObj(long? userId = null)
+        {
+            return new LogErrors()
+            {
+                Id = Id,
+                Tipo = Type,
+                UsuarioId = userId,
+                Erro = InnerException.ToString(),
+            };
+        }
     }
 }
