@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebApiStructureNetCore.Data;
 using WebApiStructureNetCore.Exceptions;
 using WebApiStructureNetCore.Models;
@@ -10,10 +11,11 @@ namespace WebApiStructureNetCore.Controllers
     [ApiController]
     public class ErrorController : ControllerBase
     {
+        public IConfiguration Configuration { get; }
         private readonly WebapiStructureDbContext _context;
-
-        public ErrorController(WebapiStructureDbContext context)
+        public ErrorController(IConfiguration configuration, WebapiStructureDbContext context)
         {
+            Configuration = configuration;
             _context = context;
         }
 
@@ -42,14 +44,17 @@ namespace WebApiStructureNetCore.Controllers
 
         private void LogErrorInDatabase(LogErrors error)
         {
-            try
+            if (Configuration.GetValue<bool>("Logs:Errors"))
             {
-                _context.DetachAllEntities();
-                _context.LogErrors.Add(error);
-                _context.SaveChanges();
-            }
-            catch (System.Exception)
-            {
+                try
+                {
+                    _context.DetachAllEntities();
+                    _context.LogErrors.Add(error);
+                    _context.SaveChanges();
+                }
+                catch (System.Exception)
+                {
+                }
             }
         }
     }
