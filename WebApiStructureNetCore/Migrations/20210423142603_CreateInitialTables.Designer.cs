@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiStructureNetCore.Data;
 
 namespace WebApiStructureNetCore.Migrations
 {
     [DbContext(typeof(WebapiStructureDbContext))]
-    partial class WebapiStructureDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210423142603_CreateInitialTables")]
+    partial class CreateInitialTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
