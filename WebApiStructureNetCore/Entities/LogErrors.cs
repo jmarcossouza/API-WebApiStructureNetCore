@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiStructureNetCore.Models
+namespace WebApiStructureNetCore.Entities
 {
     public class LogErrors
     {

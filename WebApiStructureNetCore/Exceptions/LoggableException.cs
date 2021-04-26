@@ -1,4 +1,6 @@
 ﻿using System;
+using WebApiStructureNetCore.Entities;
+using WebApiStructureNetCore.Enums;
 using WebApiStructureNetCore.Models;
 
 namespace WebApiStructureNetCore.Exceptions
@@ -10,8 +12,8 @@ namespace WebApiStructureNetCore.Exceptions
         /// </summary>
         public string Id { get; private set; }
 
-        public LoggableException(int statusCode, string message, Exception inner)
-            : base(statusCode, message, inner)
+        protected LoggableException(ExceptionTypesEnum type, int statusCode, string message, Exception inner)
+            : base(type, statusCode, message, inner)
         {
             Id = Guid.NewGuid().ToString();
         }
@@ -20,7 +22,7 @@ namespace WebApiStructureNetCore.Exceptions
         {
             return new CustomExceptionResponse()
             {
-                TipoErro = Type,
+                TipoErro = (short)Type,
                 Mensagem = Message,
                 Id = Id,
             };
@@ -31,7 +33,7 @@ namespace WebApiStructureNetCore.Exceptions
             return new LogErrors()
             {
                 Id = Id,
-                Tipo = Type,
+                Tipo = (short)Type,
                 UsuarioId = userId,
                 Erro = InnerException.ToString(),
             };

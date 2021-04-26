@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApiStructureNetCore.Models
+namespace WebApiStructureNetCore.Entities
 {
     public class Usuario : PasswordHasher<Usuario>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         /// <summary>Quando criando um novo usuário, sempre enviar com valor 0</summary>
-        public long Id { get; set; }
+        public long Id { get; set; } = 0;
         [Required]
         [MaxLength(254)]
         [Column(TypeName = "varchar")]
@@ -50,6 +50,7 @@ namespace WebApiStructureNetCore.Models
 
         public Usuario()
         {
+
             CriadoEm = DateTime.Now;
         }
 

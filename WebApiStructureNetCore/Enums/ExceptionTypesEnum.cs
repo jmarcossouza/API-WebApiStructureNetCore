@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebApiStructureNetCore.Enums
+﻿namespace WebApiStructureNetCore.Enums
 {
     public enum ExceptionTypesEnum
     {
