@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using WebApiStructureNetCore.Data;
+using WebApiStructureNetCore.Entities;
 using WebApiStructureNetCore.Exceptions;
-using WebApiStructureNetCore.Models;
 
 namespace WebApiStructureNetCore.Controllers
 {

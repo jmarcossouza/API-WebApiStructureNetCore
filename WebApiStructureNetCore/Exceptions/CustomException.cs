@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using WebApiStructureNetCore.Enums;
 using WebApiStructureNetCore.Models;
 
 namespace WebApiStructureNetCore.Exceptions
@@ -15,15 +13,16 @@ namespace WebApiStructureNetCore.Exceptions
         /// <summary>
         /// Identificador do tipo erro, isso é usado para o client identificar qual o tipo de erro que ele recebeu.
         /// </summary>
-        protected short Type { get; set; }
+        public ExceptionTypesEnum Type { get; }
 
-        public CustomException(int statusCode, string message)
+        protected CustomException(ExceptionTypesEnum type, int statusCode, string message)
             : base(message)
         {
+            Type = type;
             StatusCode = statusCode;
         }
 
-        public CustomException(int statusCode, string message, Exception inner)
+        protected CustomException(ExceptionTypesEnum type, int statusCode, string message, Exception inner)
             : base(message, inner)
         {
             StatusCode = statusCode;
@@ -33,7 +32,7 @@ namespace WebApiStructureNetCore.Exceptions
         {
             return new CustomExceptionResponse()
             {
-                TipoErro = Type,
+                TipoErro = (short)Type,
                 Mensagem = Message,
             };
         }
