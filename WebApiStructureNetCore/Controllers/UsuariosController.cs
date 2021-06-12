@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WebApiStructureNetCore.Data;
 using WebApiStructureNetCore.Entities;
@@ -65,6 +66,7 @@ namespace WebApiStructureNetCore.Controllers
             //    return BadRequest();
             //}
 
+
             var usuario = await FindUsuarioAsync(id);
             EntitiesLibrary.SetBasicValuesFrom(newUsuario, usuario, AllowEmptyOrWhitespacStrings: false);
             await _context.SaveChangesAsync();
@@ -108,6 +110,11 @@ namespace WebApiStructureNetCore.Controllers
         [Route("alterar-senha/{usuarioId}")]
         public async Task<ActionResult<UsuarioGetModel>> AlterarSenha([FromRoute] long usuarioId, [FromBody] UsuarioChangePassword usuarioEdit)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             Usuario usuario = await FindUsuarioAsync(usuarioId);
 
             if (!usuario.verifyPassword(usuarioEdit.SenhaAtual))

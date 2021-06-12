@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WebApiStructureNetCore.Enums;
 using WebApiStructureNetCore.Models;
 
@@ -14,6 +15,7 @@ namespace WebApiStructureNetCore.Exceptions
         /// Identificador do tipo erro, isso é usado para o client identificar qual o tipo de erro que ele recebeu.
         /// </summary>
         public ExceptionTypesEnum Type { get; }
+        public IEnumerable<DetailsObjectExcpetion> Erros { get; set; }
 
         protected CustomException(ExceptionTypesEnum type, int statusCode, string message)
             : base(message)
@@ -34,6 +36,7 @@ namespace WebApiStructureNetCore.Exceptions
             {
                 TipoErro = (short)Type,
                 Mensagem = Message,
+                Erros = Erros,
             };
         }
     }

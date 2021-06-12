@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiStructureNetCore.Validators;
 
 namespace WebApiStructureNetCore.Models
 {
@@ -10,7 +11,7 @@ namespace WebApiStructureNetCore.Models
     {
         [Required]
         public string SenhaAtual { get; set; }
-        [Required(AllowEmptyStrings = false)]
+        [RequiredValidator(AllowEmptyStrings = false)]
         [MinLength(8)]
         [MaxLength(84)]
         public string NovaSenha { get; set; }
